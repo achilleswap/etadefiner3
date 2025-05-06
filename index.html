@@ -126,10 +126,12 @@
         if (!response.ok) throw new Error("Erreur HTTP");
 
         const data = await response.json();
-        console.log(data); // Debug
+        console.log("Data received:", data);
+        console.log("percentageCompleted:", data.percentageCompleted);
+        console.log("etaProgressBased:", data.etaProgressBased);
 
         resultDiv.innerHTML = `
-          <p><strong>🧩 Epic:</strong> ${data.epic}</p>
+          <p><strong>🧩 Epic:</strong> ${data.epic || '—'}</p>
           <p><strong>📋 # Tickets:</strong> ${data.ticketCount}</p>
           <p><strong>✅ Total SP:</strong> ${data.totalSP}</p>
           <p><strong>🧮 Estimated SP:</strong> ${data.estimatedSP}</p>
@@ -154,7 +156,7 @@
 
       } catch (err) {
         resultDiv.innerHTML = `<p class="text-red-600">❌ Error while trying to get data.</p>`;
-        console.error(err);
+        console.error("Caught error:", err);
       } finally {
         spinner.classList.add('hidden');
       }
