@@ -73,7 +73,7 @@
     </div>
   </div>
 
-  <!-- Simple Spinner -->
+  <!-- Spinner -->
   <div id="spinner" class="hidden fixed top-0 left-0 w-full h-full bg-green-50 bg-opacity-50 flex items-center justify-center z-50">
     <div class="animate-spin rounded-full h-16 w-16 border-4 border-green-600 border-t-transparent"></div>
   </div>
@@ -137,10 +137,11 @@
           ${data.firstInProgressDate ? `<p><strong>🕒 Dev Started:</strong> ${new Date(data.firstInProgressDate).toLocaleDateString()}</p>` : ''}
           ${data.eta ? `<p><strong>🚀 ETA Goal:</strong> ${new Date(data.eta).toLocaleDateString()}</p>` : '<p>🚫 No ticket in "In Progress"</p>'}
           ${data.percentageCompleted > 0.5 ? `
-            <p class="text-center mt-4 text-yellow-700 flex items-center justify-center gap-2">
-              ⚠️ It looks like ${(data.percentageCompleted * 100).toFixed(0)}% of the feature is already completed.
-              Based on the progression and the remaining work, a more accurate ETA target would be <strong>${new Date(data.etaProgressBased).toLocaleDateString()}</strong>.
-            </p>
+            <div class="text-center mt-4 text-yellow-700">
+              <p>⚠️ It looks like ${(data.percentageCompleted * 100).toFixed(0)}% of the feature is already completed.</p>
+              <p>Based on the progression and the remaining work, a more accurate ETA target would be</p>
+              <p class="mt-1 font-bold text-black">${new Date(data.etaProgressBased).toLocaleDateString()}</p>
+            </div>
           ` : ''}
         `;
       } catch (err) {
