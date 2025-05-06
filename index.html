@@ -126,11 +126,7 @@
         if (!response.ok) throw new Error("Erreur HTTP");
 
         const data = await response.json();
-        console.log(data);
-
-        // 🧪 Données de test (retire-les plus tard)
-        data.percentageCompleted = 0.75;
-        data.etaProgressBased = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
+        console.log(data); // Debug
 
         resultDiv.innerHTML = `
           <p><strong>🧩 Epic:</strong> ${data.epic}</p>
@@ -142,7 +138,7 @@
           ${data.eta ? `<p><strong>🚀 ETA Goal:</strong> ${new Date(data.eta).toLocaleDateString()}</p>` : '<p>🚫 No ticket in "In Progress"</p>'}
         `;
 
-        if (data.percentageCompleted > 0.5) {
+        if (data.percentageCompleted > 0.5 && data.etaProgressBased) {
           resultDiv.innerHTML += `
             <div class="text-center mt-4 text-yellow-800 bg-yellow-100 p-3 rounded">
               <p class="flex items-center justify-center gap-2">
