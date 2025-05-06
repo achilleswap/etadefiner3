@@ -125,11 +125,12 @@
 
         if (!response.ok) throw new Error("Erreur HTTP");
 
-        const data = await response.json();
+        const responseData = await response.json();
+        const data = responseData[0];
         console.log(data); // Debug
 
         resultDiv.innerHTML = `
-          <p><strong>🧩 Epic:</strong> ${data.epic}</p>
+          <p><strong>🧩 Epic:</strong> ${data.epic || '—'}</p>
           <p><strong>📋 # Tickets:</strong> ${data.ticketCount}</p>
           <p><strong>✅ Total SP:</strong> ${data.totalSP}</p>
           <p><strong>🧮 Estimated SP:</strong> ${data.estimatedSP}</p>
