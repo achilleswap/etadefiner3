@@ -127,6 +127,11 @@
         if (!response.ok) throw new Error("Erreur HTTP");
 
         const data = await response.json();
+        console.log(data); // Debug
+
+        // 🧪 Données de test (à enlever après test)
+        data.percentageCompleted = 0.75;
+        data.etaProgressBased = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
 
         resultDiv.innerHTML = `
           <p><strong>🧩 Epic:</strong> ${data.epic}</p>
@@ -137,7 +142,7 @@
           ${data.firstInProgressDate ? `<p><strong>🕒 Dev Started:</strong> ${new Date(data.firstInProgressDate).toLocaleDateString()}</p>` : ''}
           ${data.eta ? `<p><strong>🚀 ETA Goal:</strong> ${new Date(data.eta).toLocaleDateString()}</p>` : '<p>🚫 No ticket in "In Progress"</p>'}
           ${data.percentageCompleted > 0.5 ? `
-            <p class="text-center mt-4 text-yellow-700 flex items-center justify-center gap-2">
+            <p class="text-center mt-4 text-yellow-800 bg-yellow-100 p-3 rounded flex items-center justify-center gap-2">
               ⚠️ It looks like ${(data.percentageCompleted * 100).toFixed(0)}% of the feature is already completed.
               Based on the progression and the remaining work, a more accurate ETA target would be <strong>${new Date(data.etaProgressBased).toLocaleDateString()}</strong>.
             </p>
