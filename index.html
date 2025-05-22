@@ -129,6 +129,7 @@
         const data = await response.json();
 
         resultDiv.innerHTML = `
+          <h4 class="text-md font-semibold text-green-700 mb-2">ETA Based on Start Date</h4>
           <p><strong>🧩 Epic(s):</strong> ${data.epic}</p>
           <p><strong>📋 #Tickets:</strong> ${data.ticketCount}</p>
           <p><strong>✅ #SP:</strong> ${data.totalSP}</p>
@@ -136,13 +137,12 @@
           <p><strong>📆 Development Time Goal:</strong> ${data.devTimeGoal} days</p>
           ${data.firstInProgressDate ? `<p><strong>🕒 First ticket in progress:</strong> ${new Date(data.firstInProgressDate).toLocaleDateString()}</p>` : ''}
           ${data.eta ? `<p><strong>🚀 ETA (Progress not considered):</strong> ${new Date(data.eta).toLocaleDateString()}</p>` : '<p>🚫 No ticket in "In Progress"</p>'}
-          ${data.percentageCompleted > 0.05 ? `
-            <div class="text-center mt-4 text-yellow-700">
-              <p>⚠️ It looks like ${(data.percentageCompleted * 100).toFixed(0)}% of the feature is already completed.</p>
-              <p>Based on the progression and the remaining work, a more accurate ETA target would be</p>
-              <p class="mt-1 font-bold text-black">${new Date(data.etaProgressBased).toLocaleDateString()}</p>
-            </div>
-          ` : ''}
+
+          <h4 class="text-md font-semibold text-green-700 mt-4 mb-2">ETA Based on Progress</h4>
+          <p><strong>📊 Percentage completed:</strong> ${(data.percentageCompleted * 100).toFixed(0)}%</p>
+          <p><strong>🧮 #SP remaining estimated:</strong> ${data.estimatedSP_ProgressBased} SP</p>
+          <p><strong>📆 Development Time Goal:</strong> ${data.devTimeGoal_ProgressBased} days</p>
+          <p><strong>🚀 ETA:</strong> ${new Date(data.etaProgressBased).toLocaleDateString()}</p>
         `;
       } catch (err) {
         resultDiv.innerHTML = `<p class="text-red-600">❌ Error while trying to get data.</p>`;
