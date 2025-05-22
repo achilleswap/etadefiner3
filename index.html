@@ -136,7 +136,7 @@
           <p><strong>📆 Development Time Goal:</strong> ${data.devTimeGoal} days</p>
           ${data.firstInProgressDate ? `<p><strong>🕒 First ticket in progress:</strong> ${new Date(data.firstInProgressDate).toLocaleDateString()}</p>` : ''}
           ${data.eta ? `<p><strong>🚀 ETA (Progress not considered):</strong> ${new Date(data.eta).toLocaleDateString()}</p>` : '<p>🚫 No ticket in "In Progress"</p>'}
-          ${data.percentageCompleted > 0.2 ? `
+          ${data.percentageCompleted > 0.05 ? `
             <div class="text-center mt-4 text-yellow-700">
               <p>⚠️ It looks like ${(data.percentageCompleted * 100).toFixed(0)}% of the feature is already completed.</p>
               <p>Based on the progression and the remaining work, a more accurate ETA target would be</p>
